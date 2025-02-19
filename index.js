@@ -4,27 +4,19 @@ const jellybutton = document.getElementById("jellybutton");
 // Асинхронная функция для получения случайной цитаты
 async function getQuote() {
     try {
-        // Отправляем запрос к API
-        const response = await fetch("https://api.quotable.io/random");
-        
-        // Проверяем, успешно ли получен ответ
-        if (!response.ok) {
-            throw new Error("Ошибка загрузки цитаты");
-        }
-        
+        const response = await fetch("https://api.adviceslip.com/advice"); // Пробуем получить данные
+        if (!response.ok) throw new Error("Ошибка загрузки");
+
         const data = await response.json();
+        console.log(data); // Посмотреть, что возвращает API
 
-        // Плавно скрываем текст перед заменой
         jellyquote.style.opacity = "0";
-
         setTimeout(() => {
-            jellyquote.textContent = data.content; // Меняем текст
-            jellyquote.style.opacity = "1"; // Показываем новый текст
+            jellyquote.textContent = data.slip.advice; // Тут исправлено
+            jellyquote.style.opacity = "1";
         }, 500);
     } catch (error) {
-        console.error("Ошибка:", error);
-        jellyquote.textContent = "Не удалось загрузить цитату :("; // Если API недоступен
-        jellyquote.style.opacity = "1";
+        jellyquote.textContent = "Не удалось загрузить цитату 😔";
     }
 }
 
