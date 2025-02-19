@@ -16,7 +16,7 @@ async function getQuote() {
             jellyquote.style.opacity = "1";
         }, 500);
     } catch (error) {
-        jellyquote.textContent = "Не удалось загрузить цитату 😔";
+        jellyquote.textContent = "Не удалось загрузить цитатку 😔";
     }
 }
 
